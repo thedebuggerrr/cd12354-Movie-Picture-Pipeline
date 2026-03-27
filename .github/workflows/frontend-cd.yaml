@@ -1,11 +1,6 @@
 name: Frontend CD
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'starter/frontend/**'
-      - '.github/workflows/frontend-cd.yml'
   workflow_dispatch:
 
 jobs:
