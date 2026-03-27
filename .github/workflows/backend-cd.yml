@@ -1,27 +1,27 @@
-name: Frontend CD
+name: Backend CD
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'starter/frontend/**'
-      - '.github/workflows/frontend-cd.yml'
+      - 'starter/backend/**'
+      - '.github/workflows/backend-cd.yml'
   workflow_dispatch:
 
 jobs:
   build-and-push:
-    name: Build and Push Frontend Image
+    name: Build and Push Backend Image
     runs-on: ubuntu-latest
     permissions:
       contents: read
 
     env:
       AWS_REGION: us-east-1
-      ECR_REPOSITORY: REPLACE_WITH_FRONTEND_ECR_REPO_NAME
+      ECR_REPOSITORY: REPLACE_WITH_BACKEND_ECR_REPO_NAME
 
     defaults:
       run:
-        working-directory: starter/frontend
+        working-directory: starter/backend
 
     steps:
       - name: Checkout repo
@@ -38,7 +38,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push frontend image
+      - name: Build, tag, and push backend image
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
